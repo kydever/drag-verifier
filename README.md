@@ -10,6 +10,9 @@ composer require kydev/drag-verifier
 
 ```php
 <?php
+
+use KY\DragVerifier\DragVerifier;
+
 // 读取滑动验证码的背景图
 $bg = imagecreatefromjpeg(__DIR__ . '/../images/IMG_0002.jpeg');
 

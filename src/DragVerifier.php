@@ -15,19 +15,27 @@ use GdImage;
 
 class DragVerifier
 {
+    protected GdImage $hollowedImage;
+
+    protected int $color;
+
     /**
      * @param GdImage $image 原图
      * @param GdImage $fillImage 被填充到原图的滑块图
-     * @param GdImage $hollowedImage 滑块图的镂空图
+     * @param ?GdImage $hollowedImage 滑块图的镂空图 不填时，要求填充图必须为纯色，且中间必须存在填充颜色
      * @param ?int $color 滑块图的镂空图中需要被透明化的色值
      */
     public function __construct(
         protected GdImage $image,
         protected GdImage $fillImage,
-        protected GdImage $hollowedImage,
-        protected ?int $color = null,
+        ?GdImage $hollowedImage = null,
+        ?int $color = null,
     ) {
-        $this->color = imagecolorat($hollowedImage, 0, 0);
+        if ($hollowedImage === null) {
+            $this->hollowedImage = $this->createHollowedImage();
+        }
+
+        $this->color = $color ?? imagecolorat($this->hollowedImage, 0, 0);
     }
 
     public function generate(): DragCode
@@ -76,5 +84,18 @@ class DragVerifier
             && $x <= $code->getX() + $threshold
             && $y >= $code->getY() - $threshold
             && $y <= $code->getY() + $threshold;
+    }
+
+    private function createHollowedImage(): GdImage
+    {
+        $x = imagesx($this->fillImage);
+        $y = imagesy($this->fillImage);
+        $color = imagecolorat($this->fillImage, $x / 2, $y / 2);
+
+        $image = imagecreatetruecolor($x, $y);
+        imagecolorallocate($image, 0, 255, 0);
+        imagecopy($image, $this->fillImage, 0, 0, 0, 0, $x, $y);
+        imagecolortransparent($image, $color);
+        return $image;
     }
 }

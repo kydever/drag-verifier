@@ -44,4 +44,15 @@ class DragVerifierTest extends AbstractTestCase
         $res = $verifier->save($code, __DIR__);
         $this->assertTrue($res);
     }
+
+    public function testSaveOnlyWithFillImage()
+    {
+        $bg = imagecreatefromjpeg(__DIR__ . '/../images/IMG_0002.jpeg');
+        $fillImage = imagecreatefrompng(__DIR__ . '/../images/ky_fill.png');
+        $verifier = new DragVerifier($bg, $fillImage);
+
+        $code = $verifier->generate();
+        $res = $verifier->save($code, __DIR__);
+        $this->assertTrue($res);
+    }
 }

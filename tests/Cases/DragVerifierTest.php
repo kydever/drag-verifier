@@ -32,4 +32,17 @@ class DragVerifierTest extends AbstractTestCase
 
         $this->assertInstanceOf(DragCode::class, $code);
     }
+
+    public function testSave()
+    {
+        $bg = imagecreatefromjpeg(__DIR__ . '/../images/IMG_0002.jpeg');
+        $fillImage = imagecreatefrompng(__DIR__ . '/../images/fill.png');
+        $hollowedImage = imagecreatefrompng(__DIR__ . '/../images/hollowed.png');
+
+        $verifier = new DragVerifier($bg, $fillImage, $hollowedImage);
+
+        $code = $verifier->generate();
+        $res = $verifier->save($code, __DIR__);
+        $this->assertTrue($res);
+    }
 }

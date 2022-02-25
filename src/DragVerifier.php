@@ -25,9 +25,8 @@ class DragVerifier
         protected GdImage $image,
         protected GdImage $fillImage,
         protected GdImage $hollowedImage,
-        protected int     $color = 65280,
-    )
-    {
+        protected int $color = 65280,
+    ) {
     }
 
     public function generate(): DragCode
@@ -43,7 +42,6 @@ class DragVerifier
         $background = imagecreatetruecolor($bgX, $bgY);
         imagecopy($background, $this->image, 0, 0, 0, 0, $bgX, $bgY);
         imagecopy($background, $this->fillImage, $x, $y, 0, 0, $smX, $smY);
-        var_dump($smX, $smY);
 
         $smX = imagesx($this->hollowedImage);
         $smY = imagesy($this->hollowedImage);

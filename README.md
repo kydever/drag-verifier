@@ -1,5 +1,5 @@
-# component-creator
+# 滑动验证码
 
 ```
-composer create-project hyperf/component-creator
+composer require kydev/drag-verifier
 ```

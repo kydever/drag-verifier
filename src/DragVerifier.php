@@ -32,10 +32,11 @@ class DragVerifier
         ?int $color = null,
     ) {
         if ($hollowedImage === null) {
-            $this->hollowedImage = $this->createHollowedImage();
+            $hollowedImage = $this->createHollowedImage();
         }
 
-        $this->color = $color ?? imagecolorat($this->hollowedImage, 0, 0);
+        $this->hollowedImage = $hollowedImage;
+        $this->color = $color ?? imagecolorat($hollowedImage, 0, 0);
     }
 
     public function generate(): DragCode

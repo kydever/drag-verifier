@@ -18,15 +18,16 @@ class DragVerifier
     /**
      * @param GdImage $image 原图
      * @param GdImage $fillImage 被填充到原图的滑块图
-     * @param GdImage $hollowedImage 被填充到原图的滑块图的镂空图
-     * @param int $color
+     * @param GdImage $hollowedImage 滑块图的镂空图
+     * @param ?int $color 滑块图的镂空图中需要被透明化的色值
      */
     public function __construct(
         protected GdImage $image,
         protected GdImage $fillImage,
         protected GdImage $hollowedImage,
-        protected int $color = 65280,
+        protected ?int $color = null,
     ) {
+        $this->color = imagecolorat($hollowedImage, 0, 0);
     }
 
     public function generate(): DragCode

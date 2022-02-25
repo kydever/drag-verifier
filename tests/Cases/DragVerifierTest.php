@@ -36,9 +36,8 @@ class DragVerifierTest extends AbstractTestCase
     public function testSave()
     {
         $bg = imagecreatefromjpeg(__DIR__ . '/../images/IMG_0002.jpeg');
-        $fillImage = imagecreatefrompng(__DIR__ . '/../images/fill.png');
-        $hollowedImage = imagecreatefrompng(__DIR__ . '/../images/hollowed.png');
-
+        $fillImage = imagecreatefrompng(__DIR__ . '/../images/ky_fill.png');
+        $hollowedImage = imagecreatefrompng(__DIR__ . '/../images/ky_hollowed.png');
         $verifier = new DragVerifier($bg, $fillImage, $hollowedImage);
 
         $code = $verifier->generate();

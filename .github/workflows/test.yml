@@ -15,11 +15,6 @@ jobs:
         os: [ ubuntu-latest ]
         php-version: [ '8.0' ]
         engine: [ 'none', 'swoole', 'swow' ]
-        exclude:
-          - php-version: '7.3'
-            engine: 'swow'
-          - php-version: '7.4'
-            engine: 'swow'
       max-parallel: 5
     steps:
       - name: Checkout
@@ -29,7 +24,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           tools: phpize
-          ini-values: opcache.enable_cli=1
+          ini-values: opcache.enable_cli=0
           coverage: none
       - name: Setup Swoole
         if: ${{ matrix.engine == 'swoole' }}

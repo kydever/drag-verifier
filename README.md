@@ -1,5 +1,7 @@
 # 滑动验证码
 
+[![PHPUnit](https://github.com/kydever/drag-verifier/actions/workflows/test.yml/badge.svg)](https://github.com/kydever/drag-verifier/actions/workflows/test.yml)
+
 ## 安装
 
 ```
@@ -26,3 +28,9 @@ $code = $verifier->generate();
 // 保存图片
 $res = $verifier->save($code, __DIR__);
 ```
+
+## 版权说明
+
+测试目录的 `ky_fill.png` 和 `ky_hollowed.png` 版权所属 `KnowYourself`
+
+禁止随意使用。
